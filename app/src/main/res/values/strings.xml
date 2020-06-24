@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">LocationLogger</string>
+    <string name="title_location_permission">Location Permission</string>
+    <string name="text_location_permission">Location Logger will ask for location access</string>
+    <string name="ok">OK</string>
+    <string name="button_location_log">Log</string>
+    <string name="title_address">Address:</string>
+    <string name="title_gps">GPS Coordinate:</string>
+    <string name="title_time">Time:</string>
 </resources>
