@@ -1,0 +1,22 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "com.example.grpc";
+option java_outer_classname = "LocationLoggerProto";
+
+package grpc;
+
+message LocationInfo {
+  string address = 1;
+  double latitude = 2;
+  double longitude = 3;
+  string time = 4;
+}
+
+message LocationAddResponse {
+  string response = 1;
+}
+
+service LocationLoggerService {
+  rpc locationAdd(LocationInfo) returns (LocationAddResponse) {}
+}
