@@ -7,4 +7,6 @@
     <string name="title_address">Address:</string>
     <string name="title_gps">GPS Coordinate:</string>
     <string name="title_time">Time:</string>
+    <string name="title_logger_page">Logger</string>
+    <string name="title_history_page">History</string>
 </resources>

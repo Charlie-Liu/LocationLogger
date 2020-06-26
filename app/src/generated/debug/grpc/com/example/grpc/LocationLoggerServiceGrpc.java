@@ -57,6 +57,36 @@ public final class LocationLoggerServiceGrpc {
     return getLocationAddMethod;
   }
 
+  private static volatile io.grpc.MethodDescriptor<com.example.grpc.LocationListRequest,
+      com.example.grpc.LocationInfo> getLocationListMethod;
+
+  @io.grpc.stub.annotations.RpcMethod(
+      fullMethodName = SERVICE_NAME + '/' + "locationList",
+      requestType = com.example.grpc.LocationListRequest.class,
+      responseType = com.example.grpc.LocationInfo.class,
+      methodType = io.grpc.MethodDescriptor.MethodType.SERVER_STREAMING)
+  public static io.grpc.MethodDescriptor<com.example.grpc.LocationListRequest,
+      com.example.grpc.LocationInfo> getLocationListMethod() {
+    io.grpc.MethodDescriptor<com.example.grpc.LocationListRequest, com.example.grpc.LocationInfo> getLocationListMethod;
+    if ((getLocationListMethod = LocationLoggerServiceGrpc.getLocationListMethod) == null) {
+      synchronized (LocationLoggerServiceGrpc.class) {
+        if ((getLocationListMethod = LocationLoggerServiceGrpc.getLocationListMethod) == null) {
+          LocationLoggerServiceGrpc.getLocationListMethod = getLocationListMethod =
+              io.grpc.MethodDescriptor.<com.example.grpc.LocationListRequest, com.example.grpc.LocationInfo>newBuilder()
+              .setType(io.grpc.MethodDescriptor.MethodType.SERVER_STREAMING)
+              .setFullMethodName(generateFullMethodName(SERVICE_NAME, "locationList"))
+              .setSampledToLocalTracing(true)
+              .setRequestMarshaller(io.grpc.protobuf.lite.ProtoLiteUtils.marshaller(
+                  com.example.grpc.LocationListRequest.getDefaultInstance()))
+              .setResponseMarshaller(io.grpc.protobuf.lite.ProtoLiteUtils.marshaller(
+                  com.example.grpc.LocationInfo.getDefaultInstance()))
+              .build();
+        }
+      }
+    }
+    return getLocationListMethod;
+  }
+
   /**
    * Creates a new async stub that supports all call types for the service
    */
@@ -112,6 +142,13 @@ public final class LocationLoggerServiceGrpc {
       asyncUnimplementedUnaryCall(getLocationAddMethod(), responseObserver);
     }
 
+    /**
+     */
+    public void locationList(com.example.grpc.LocationListRequest request,
+        io.grpc.stub.StreamObserver<com.example.grpc.LocationInfo> responseObserver) {
+      asyncUnimplementedUnaryCall(getLocationListMethod(), responseObserver);
+    }
+
     @java.lang.Override public final io.grpc.ServerServiceDefinition bindService() {
       return io.grpc.ServerServiceDefinition.builder(getServiceDescriptor())
           .addMethod(
@@ -121,6 +158,13 @@ public final class LocationLoggerServiceGrpc {
                 com.example.grpc.LocationInfo,
                 com.example.grpc.LocationAddResponse>(
                   this, METHODID_LOCATION_ADD)))
+          .addMethod(
+            getLocationListMethod(),
+            asyncServerStreamingCall(
+              new MethodHandlers<
+                com.example.grpc.LocationListRequest,
+                com.example.grpc.LocationInfo>(
+                  this, METHODID_LOCATION_LIST)))
           .build();
     }
   }
@@ -146,6 +190,14 @@ public final class LocationLoggerServiceGrpc {
       asyncUnaryCall(
           getChannel().newCall(getLocationAddMethod(), getCallOptions()), request, responseObserver);
     }
+
+    /**
+     */
+    public void locationList(com.example.grpc.LocationListRequest request,
+        io.grpc.stub.StreamObserver<com.example.grpc.LocationInfo> responseObserver) {
+      asyncServerStreamingCall(
+          getChannel().newCall(getLocationListMethod(), getCallOptions()), request, responseObserver);
+    }
   }
 
   /**
@@ -167,6 +219,14 @@ public final class LocationLoggerServiceGrpc {
     public com.example.grpc.LocationAddResponse locationAdd(com.example.grpc.LocationInfo request) {
       return blockingUnaryCall(
           getChannel(), getLocationAddMethod(), getCallOptions(), request);
+    }
+
+    /**
+     */
+    public java.util.Iterator<com.example.grpc.LocationInfo> locationList(
+        com.example.grpc.LocationListRequest request) {
+      return blockingServerStreamingCall(
+          getChannel(), getLocationListMethod(), getCallOptions(), request);
     }
   }
 
@@ -194,6 +254,7 @@ public final class LocationLoggerServiceGrpc {
   }
 
   private static final int METHODID_LOCATION_ADD = 0;
+  private static final int METHODID_LOCATION_LIST = 1;
 
   private static final class MethodHandlers<Req, Resp> implements
       io.grpc.stub.ServerCalls.UnaryMethod<Req, Resp>,
@@ -215,6 +276,10 @@ public final class LocationLoggerServiceGrpc {
         case METHODID_LOCATION_ADD:
           serviceImpl.locationAdd((com.example.grpc.LocationInfo) request,
               (io.grpc.stub.StreamObserver<com.example.grpc.LocationAddResponse>) responseObserver);
+          break;
+        case METHODID_LOCATION_LIST:
+          serviceImpl.locationList((com.example.grpc.LocationListRequest) request,
+              (io.grpc.stub.StreamObserver<com.example.grpc.LocationInfo>) responseObserver);
           break;
         default:
           throw new AssertionError();
@@ -242,6 +307,7 @@ public final class LocationLoggerServiceGrpc {
         if (result == null) {
           serviceDescriptor = result = io.grpc.ServiceDescriptor.newBuilder(SERVICE_NAME)
               .addMethod(getLocationAddMethod())
+              .addMethod(getLocationListMethod())
               .build();
         }
       }
